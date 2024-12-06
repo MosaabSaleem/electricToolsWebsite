@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Digital Multimeter",
+    "image_url": "https://example.com/images/digital-multimeter.jpg",
+    "qty": 40,
+    "price": 99.99,
+    "description": "A high-accuracy digital multimeter for measuring voltage, current, and resistance in electrical systems.",
+    "category": "Measurement Tools"
+  },
+  {
+    "id": 2,
+    "name": "Insulated Screwdriver Set",
+    "image_url": "https://example.com/images/insulated-screwdrivers.jpg",
+    "qty": 100,
+    "price": 29.99,
+    "description": "A set of insulated screwdrivers designed for working on live electrical circuits up to 1,000 volts.",
+    "category": "Hand Tools"
+  },
+  {
+    "id": 3,
+    "name": "Wire Stripper and Cutter",
+    "image_url": "https://example.com/images/wire-stripper.jpg",
+    "qty": 150,
+    "price": 14.99,
+    "description": "A reliable wire stripper and cutter with ergonomic handles and multiple gauge stripping slots.",
+    "category": "Wire Tools"
+  },
+  {
+    "id": 4,
+    "name": "Voltage Tester Pen",
+    "image_url": "https://example.com/images/voltage-tester-pen.jpg",
+    "qty": 200,
+    "price": 19.99,
+    "description": "A non-contact voltage tester pen with LED indicators for quickly detecting live wires.",
+    "category": "Safety Tools"
+  },
+  {
+    "id": 5,
+    "name": "Electrical Tape Set",
+    "image_url": "https://example.com/images/electrical-tape.jpg",
+    "qty": 500,
+    "price": 9.99,
+    "description": "A set of durable and flame-resistant electrical tapes in multiple colors for wire insulation and coding.",
+    "category": "Insulation Materials"
+  },
+  {
+    "id": 6,
+    "name": "Conduit Bender",
+    "image_url": "https://example.com/images/conduit-bender.jpg",
+    "qty": 30,
+    "price": 79.99,
+    "description": "A heavy-duty conduit bender for precise bending of electrical conduits with marked degree scales.",
+    "category": "Bending Tools"
+  },
+  {
+    "id": 7,
+    "name": "Cable Pulling Fish Tape",
+    "image_url": "https://example.com/images/fish-tape.jpg",
+    "qty": 50,
+    "price": 49.99,
+    "description": "A 50-foot durable fish tape for guiding wires and cables through walls, conduits, and tight spaces.",
+    "category": "Cable Management"
+  },
+  {
+    "id": 8,
+    "name": "Electrical Crimping Tool",
+    "image_url": "https://example.com/images/crimping-tool.jpg",
+    "qty": 80,
+    "price": 39.99,
+    "description": "A professional-grade crimping tool for securely attaching connectors to electrical wires.",
+    "category": "Connector Tools"
+  }
+]
