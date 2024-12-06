@@ -1,0 +1,12 @@
+.navBar{
+  background-color: blue;
+  height: 6em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.navPart{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

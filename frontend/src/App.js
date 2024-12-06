@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import LandingPage from './Pages/landingPage';
+import ProductPage from './Pages/ProductPage';
 
 function App() {
   // const [data, setData] = useState(null);
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div>
-      <LandingPage/>
+      <ProductPage/>
     </div>
   );
 }

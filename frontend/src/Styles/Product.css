@@ -1,0 +1,10 @@
+.searchDiv{
+  padding-left: 1em;
+  padding-right: 2em;
+  padding-top: 1em;
+}
+
+.searchBar{
+  width: 100%;
+  height: 2em;
+}
