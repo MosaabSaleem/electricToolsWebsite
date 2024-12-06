@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../Components/Layout";
 import '../Styles/Product.css';
+import products from '../products.json';
 
 const ProductPage = () => {
 
@@ -10,7 +11,16 @@ const ProductPage = () => {
         <input className="searchBar" placeholder="Search"></input>
       </div>
       
-      <h1>Hello World!</h1>
+      <h1>Products</h1>
+
+      <div className="grid-container">
+        {products.map((product) => (
+          <div className="item">
+            <h3>{product.name}</h3>
+          </div>
+        ))}
+      </div>
+      
     </Layout>
   );
 };
