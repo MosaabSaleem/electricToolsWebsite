@@ -12,7 +12,7 @@
     "id": 2,
     "name": "Insulated Screwdriver Set",
     "image_url": "https://example.com/images/insulated-screwdrivers.jpg",
-    "qty": 100,
+    "qty": 0,
     "price": 29.99,
     "description": "A set of insulated screwdrivers designed for working on live electrical circuits up to 1,000 volts.",
     "category": "Hand Tools"

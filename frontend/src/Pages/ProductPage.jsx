@@ -17,6 +17,11 @@ const ProductPage = () => {
         {products.map((product) => (
           <div className="item">
             <h3>{product.name}</h3>
+            <p className="price"></p>
+            {product.qty <= 0 ?
+              <button className="noAddToCart">Item Unavailable</button> :
+              <button className="AddToCart">Add to Cart</button>
+            }
           </div>
         ))}
       </div>
