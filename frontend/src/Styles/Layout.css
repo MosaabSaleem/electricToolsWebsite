@@ -1,12 +1,32 @@
 .navBar{
-  background-color: blue;
-  height: 6em;
+  background-color: #0c2433;
+  height: 9em;
   padding-left: 1em;
   padding-right: 1em;
+  padding-top: 1em;
 }
 
 .navPart{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.logo{
+  width: fit-content;
+  height: 80px;
+}
+
+.categories {
+  overflow-x: auto;
+  white-space: nowrap; 
+  width: 100%; 
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1em;
+}
+
+.categories::-webkit-scrollbar {
+  display: none;
 }
