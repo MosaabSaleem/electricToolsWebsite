@@ -1,21 +1,36 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Layout from "../Components/Layout";
 import '../Styles/Product.css';
 import products from '../products.json';
 
 const ProductPage = () => {
+  const [searchWord, setSearchWord] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
+  // Effect to filter products based on searchWord
+  useEffect(() => {
+    if (searchWord === '') {
+      setFilteredProducts(products);
+    } else {
+      const tempProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchWord.toLowerCase())
+      );
+      setFilteredProducts(tempProducts);
+    }
+  }, [searchWord, products]);
 
   return (
     <Layout>
       <div className="productsBody">
         <div className="searchDiv">
-          <input className="searchBar" placeholder="Search"></input>
+          <input className="searchBar" placeholder="Search" onChange={(e) => setSearchWord(e.target.value)}></input>
+          {/* <button onClick={submitSearch}>Submit</button> */}
         </div>
         
         <h1 className="productsTitle">Products</h1>
 
         <div className="grid-container">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div className="item">
               <h3>{product.name}</h3>
               <div>

@@ -9,10 +9,14 @@ const Layout = () => {
     categories.push(product.category);
   });
 
+  const handleCategoryClick = () => {
+    alert("Category Clicked");
+  };
+
   return (
     <div className="categories">
       {categories.map((category) => (
-        <Chip label={category} sx={{ backgroundColor: "orange" }}></Chip>
+        <Chip label={category} onClick={handleCategoryClick} sx={{ backgroundColor: "orange" }}></Chip>
       ))}
     </div>
   );
