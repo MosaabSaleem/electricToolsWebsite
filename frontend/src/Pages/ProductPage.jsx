@@ -2,12 +2,13 @@ import React, {useState, useEffect} from "react";
 import Layout from "../Components/Layout";
 import '../Styles/Product.css';
 import products from '../products.json';
+import { Modal } from "@mui/material";
 
 const ProductPage = () => {
+  //Search function
   const [searchWord, setSearchWord] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  // Effect to filter products based on searchWord
   useEffect(() => {
     if (searchWord === '') {
       setFilteredProducts(products);
@@ -18,6 +19,11 @@ const ProductPage = () => {
       setFilteredProducts(tempProducts);
     }
   }, [searchWord, products]);
+
+  //Cart Modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false)
 
   return (
     <Layout>
