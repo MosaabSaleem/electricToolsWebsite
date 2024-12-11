@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import Layout from "../Components/Layout";
 import '../Styles/Product.css';
 import products from '../products.json';
-import { Modal } from "@mui/material";
 
 const ProductPage = () => {
   //Search function
@@ -18,19 +17,13 @@ const ProductPage = () => {
       );
       setFilteredProducts(tempProducts);
     }
-  }, [searchWord, products]);
-
-  //Cart Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false)
+  }, [searchWord]);
 
   return (
     <Layout>
       <div className="productsBody">
         <div className="searchDiv">
           <input className="searchBar" placeholder="Search" onChange={(e) => setSearchWord(e.target.value)}></input>
-          {/* <button onClick={submitSearch}>Submit</button> */}
         </div>
         
         <h1 className="productsTitle">Products</h1>

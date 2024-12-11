@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   const handleLoginClick = () => {
-    alert("login");
+    alert("login" + username + password);
   };
 
   return (
@@ -24,11 +24,12 @@ const LoginPage = () => {
         </div>
         
         <div className="inputDiv">
-          <Input className="loginInput" placeholder="Email"></Input>
+          <Input className="loginInput" placeholder="Email" onChange={(e) => setUsername(e.target.value)}></Input>
           <Input
             className="loginInput"
             placeholder="Password"
             type="password"
+            onChange={(e) => setPassword(e.target.value)}
           ></Input>
         </div>
         
