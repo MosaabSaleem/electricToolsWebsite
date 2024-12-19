@@ -1,0 +1,33 @@
+.cartBody{
+  background-color: white;
+  width: 50vh;
+  height: 50vh;
+}
+
+.cartItem{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.cartItems{
+  height: 30vh;
+  overflow-y: auto;
+  
+}
+
+.cartItems::-webkit-scrollbar {
+  display: none;
+}
+
+.cartItemImage{
+  width: 75px;
+}
+
+.cartButtons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
