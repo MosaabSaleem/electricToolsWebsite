@@ -14,12 +14,16 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [isVerified, setIsVerified] = useState(false);
 
-  const handleLoginClick = () => {
-    alert("login" + username + password);
-    const res = axios.get("/api/userVerification", {username, password});
+  const handleLoginClick = async () => {
+    //alert("login" + username + password);
+    const email = username;
+    const res = await axios.post("/api/userVerification", {email, password});
+    console.log(res.data);  
     setIsVerified(res.data.verified);
-    if (isVerified) {
+    const verified = await res.data.verified;
+    if (verified) {
       const name = res.data.name;
+      localStorage.setItem("name", name);
       navigate("/admin");
     } else {
       alert("Invalid username or password");

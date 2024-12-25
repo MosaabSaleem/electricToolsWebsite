@@ -46,13 +46,16 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
-app.get("/api/userVerification", async (req, res) => {
+app.post("/api/userVerification", async (req, res) => {
   const { email, password } = req.body;
+  console.log("Verifying user:", email, password);
   try {
     const user = await User.findOne({ email, password });
     if (user) {
+      console.log("User found:", user);
       res.json({verified: true, name: user.name});
     } else {
+      console.log("User not found");
       res.json({verified: false});
     }
   } catch (error) {
