@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../Styles/Layout.css";
-import Categories from "./Categories";
+// import Categories from "./Categories";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import { Modal } from "@mui/material";
@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 import CartModal from "./CartModal";
 
 const Layout = ({ children }) => {
-   //Cart Modal
-   const [open, setOpen] = useState(false);
-   const handleOpen = () => setOpen(true);
-   const handleClose = () => setOpen(false)
+  //Cart Modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const navigate = useNavigate();
 
@@ -20,10 +20,8 @@ const Layout = ({ children }) => {
   // };
 
   const handleAccountClick = () => {
-    navigate('/login');
+    navigate("/login");
   };
-
- 
 
   return (
     <>
@@ -37,7 +35,7 @@ const Layout = ({ children }) => {
             <ShoppingCartIcon sx={{ color: "orange", fontSize: 40 }} />
           </div>
         </div>
-        <Categories></Categories>
+        {/* <Categories></Categories> */}
       </div>
       <CartModal open={open} handleClose={handleClose}></CartModal>
       <main>{children}</main>

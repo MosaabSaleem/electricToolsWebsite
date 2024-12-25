@@ -6,18 +6,22 @@ import Login from './Pages/LoginPage';
 import Admin from './Pages/AdminPage';
 import Checkout from './Pages/CheckoutPage';
 import Signup from './Pages/SignupPage';
+import Layout from './Components/Layout';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<ProductPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path='/checkout' element={<Checkout/>} />
-      </Routes>
-    </Router>
+    
+      <Router>
+        <Layout>
+        <Routes>
+          <Route path="/" element={<ProductPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path='/checkout' element={<Checkout/>} />
+        </Routes>
+        </Layout>
+      </Router>
   );
 }
 
