@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from "react";
 // import Layout from "../Components/Layout";
 import "../Styles/Product.css";
-import products from "../products.json";
+//import products from "../products.json";
 import Categories from "../Components/Categories";
+import axios from "axios";
 
 const ProductPage = () => {
+  const [products, setProducts] = useState([]); 
   //Search function
   const [searchWord, setSearchWord] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
-
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try{
+        const res = await axios.get("/getProducts");
+        setProducts(res.data);
+        console.log(res.data);
+        setFilteredProducts(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     if (searchWord === "") {

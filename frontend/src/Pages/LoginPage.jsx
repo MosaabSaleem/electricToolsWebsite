@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Input } from "@mui/material";
 import "../Styles/Login.css";
+import axios from "axios";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,9 +12,19 @@ const LoginPage = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
 
   const handleLoginClick = () => {
     alert("login" + username + password);
+    const res = axios.get("/api/userVerification", {username, password});
+    setIsVerified(res.data.verified);
+    if (isVerified) {
+      const name = res.data.name;
+      navigate("/admin");
+    } else {
+      alert("Invalid username or password");
+    }
+
   };
 
   return (
