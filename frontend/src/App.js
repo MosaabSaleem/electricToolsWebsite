@@ -8,6 +8,7 @@ import Checkout from './Pages/CheckoutPage';
 import Signup from './Pages/SignupPage';
 import Layout from './Components/Layout';
 import ItemDetailsPage from './Pages/ItemDetailsPage';
+import NewItemPage from './Pages/NewItemPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path='/checkout' element={<Checkout/>} />
           <Route path='/item/:id' element={<ItemDetailsPage/>} />
+          <Route path='/newItem' element={<NewItemPage/>} />
         </Routes>
         </Layout>
       </Router>

@@ -52,9 +52,10 @@ app.get("/api/products/:id", async (req, res) => {
 
 app.post("/api/products", async (req, res) => {
   try {
-    const { name, price, description, image, qty, category } = req.body;
-    const newProduct = new Product({ name, price, description, image, qty, category });
-    const product = await newProduct.save();
+    const { name, price, description, image_url, qty, category } = req.body;
+    const newProduct = new Product({ name, price, description, image_url, qty, category });
+    console.log("Creating product:", newProduct);
+    const product = await Product.create(newProduct);
     res.json(product);
   } catch (error) {
     res.json({message: "Error creating product"});
@@ -62,14 +63,14 @@ app.post("/api/products", async (req, res) => {
 });
 
 app.put("/api/products/:id", async (req, res) => {
-  const { name, price, description, image, qty, category } = req.body;
+  const { name, price, description, image_url, qty, category } = req.body;
   try {
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name;
       product.price = price;
       product.description = description;
-      product.image = image;
+      product.image_url = image_url;
       product.qty = qty;
       product.category = category;
       const updatedProduct = await product.save();

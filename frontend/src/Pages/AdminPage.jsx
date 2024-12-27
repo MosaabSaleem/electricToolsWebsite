@@ -43,6 +43,10 @@ const AdminPage = () => {
     navigate(`/item/${item._id}`);
   }
 
+  const handleAddClick = () => {
+    navigate("/newItem");
+  }
+
   return (
     <div>
       <h1 className="adminTitle">Admin Page - {adminName}</h1>
@@ -78,7 +82,7 @@ const AdminPage = () => {
 
       <div className="buttonsContainer">
         <div className="adminButtons">
-          <Button variant="contained" onClick={handleOpen}>New</Button>
+          <Button variant="contained" onClick={handleAddClick}>New</Button>
           <Button variant="contained" onClick={handleHomeClick}>
             Home
           </Button>
