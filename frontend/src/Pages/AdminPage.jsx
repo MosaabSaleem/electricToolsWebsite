@@ -39,6 +39,10 @@ const AdminPage = () => {
     navigate("/");
   };
 
+  const handleItemClick = (item) => {
+    navigate(`/item/${item._id}`);
+  }
+
   return (
     <div>
       <h1 className="adminTitle">Admin Page - {adminName}</h1>
@@ -55,7 +59,7 @@ const AdminPage = () => {
         <div className="stockItems">
           {filteredProducts.map((item) => (
             <>
-              <div className="stockItem" onClick={() => console.log(item)}>
+              <div className="stockItem" onClick={() => handleItemClick(item)}>
                 <p style={{ width: "100px" }}>{item.name}</p>
                 <p>{item.category}</p>
                 <img

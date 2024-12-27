@@ -1,0 +1,73 @@
+.itemTitle {
+  font-size: xx-large;
+  padding-left: 1em;
+  color: white;
+}
+
+.itemContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.itemForm {
+  display: grid;
+  grid-template-columns: 20vh 1fr;
+  gap: 1vh;
+  width: 50%;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
+.stockList {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding-left: 4vh;
+  padding-right: 4vh;
+}
+
+.itemTitles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
+
+.itemDetail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1vh;
+  padding-top: 1vh;
+}
+
+.itemDetails {
+  height: 60vh;
+  overflow-y: auto;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
+
+.itemDetails::-webkit-scrollbar {
+  display: none;
+}
+
+.itemDetailImage {
+  width: 75px;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.adminButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 50%;
+}
