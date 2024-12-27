@@ -35,7 +35,10 @@ const ProductPage = () => {
       );
       setFilteredProducts(tempProducts);
     }
+    // eslint-disable-next-line
+  }, [searchWord]);
 
+  useEffect(() => {
     if (selectedCategory === "All") {
       setFilteredProducts(products);
     } else {
@@ -44,7 +47,8 @@ const ProductPage = () => {
       );
       setFilteredProducts(tempProducts);
     }
-  }, [searchWord, selectedCategory]);
+    // eslint-disable-next-line
+  }, [selectedCategory]);
 
   return (
     <>

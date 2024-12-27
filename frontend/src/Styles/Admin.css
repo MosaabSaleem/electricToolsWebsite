@@ -1,0 +1,58 @@
+.adminTitle {
+  font-size: xx-large;
+  padding-left: 1em;
+  color: white;
+}
+
+.stockList {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding-left: 4vh;
+  padding-right: 4vh;
+}
+
+.stockListTitles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
+
+.stockItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1vh;
+  padding-top: 1vh;
+}
+
+.stockItems {
+  height: 60vh;
+  overflow-y: auto;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
+
+.stockItems::-webkit-scrollbar {
+  display: none;
+}
+
+.stockItemImage {
+  width: 75px;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.adminButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 50%;
+}

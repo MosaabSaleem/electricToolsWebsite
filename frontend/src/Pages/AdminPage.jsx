@@ -1,52 +1,87 @@
-import { Button } from '@mui/material';
-import React, {useState, useEffect} from 'react';
-import "../Styles/Product.css"
-import axios from 'axios';
+import { Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import "../Styles/Product.css";
+import "../Styles/Admin.css";
+import axios from "axios";
+import { Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import NewProductModal from "../Components/NewProductModal";
 
 const AdminPage = () => {
-  const adminName = localStorage.getItem("name") ? localStorage.getItem("name") : "null";
+  const adminName = localStorage.getItem("name")
+    ? localStorage.getItem("name")
+    : "null";
 
-  const [products, setProducts] = useState([]); 
+  const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  
+
   useEffect(() => {
     const fetchProducts = async () => {
-      try{
+      try {
         const res = await axios.get("/getProducts");
         setProducts(res.data);
-        console.log(res.data);
+        console.log(products);
         setFilteredProducts(res.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchProducts();
+    // eslint-disable-next-line
   }, []);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const navigate = useNavigate();
+  const handleHomeClick = () => {
+    navigate("/");
+  };
 
   return (
     <div>
-      <h1 className='productsTitle'>Admin Page - {adminName}</h1>
-      
-      <div className="grid-container">
-          {filteredProducts.map((product) => (
-            <div className="item">
-              <h3>{product.name}</h3>
-              <div>
+      <h1 className="adminTitle">Admin Page - {adminName}</h1>
+
+      <div className="stockList">
+        <div className="stockListTitles">
+          <p style={{ width: "100px" }}>Name</p>
+          <p>Category</p>
+          <p>Image</p>
+          <p>Price $</p>
+          <p>qty</p>
+        </div>
+        <Divider></Divider>
+        <div className="stockItems">
+          {filteredProducts.map((item) => (
+            <>
+              <div className="stockItem" onClick={() => console.log(item)}>
+                <p style={{ width: "100px" }}>{item.name}</p>
+                <p>{item.category}</p>
                 <img
-                  className="itemImage"
-                  src={product.image_url}
+                  className="stockItemImage"
+                  src={item.image_url}
                   alt="item"
                 ></img>
+                <p>{item.price}</p>
+                <p>{item.qty}</p>
               </div>
-              <p className="price">Price: ${product.price}</p>
-              <p className="price">Qty: {product.qty}</p>
-            </div>
+              <Divider></Divider>
+            </>
           ))}
-        </div>     
+        </div>
+      </div>
 
-      <Button variant="contained">Save</Button>
-      <Button variant="contained">New</Button>
-      <Button variant="contained">Home</Button>
+      <div className="buttonsContainer">
+        <div className="adminButtons">
+          <Button variant="contained" onClick={handleOpen}>New</Button>
+          <Button variant="contained" onClick={handleHomeClick}>
+            Home
+          </Button>
+        </div>
+      </div>
+
+      <NewProductModal open={open} handleClose={handleClose}></NewProductModal>
     </div>
   );
 };

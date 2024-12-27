@@ -1,8 +1,7 @@
 body {
-  background-image: linear-gradient( #0c2433, grey, darkgrey);
+  /* background-image: linear-gradient( #0c2433, grey, darkgrey); */
   margin: 0;
   padding: 0;
-  height: 100vh;
 }
 
 
@@ -10,18 +9,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .middleContainer{
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 65vh;
   width: 60vh;
+  margin-top: 5vh;
   /* opacity: .5; */
 }
 

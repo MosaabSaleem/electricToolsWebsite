@@ -29,20 +29,49 @@ app.get("/getProducts", async (req, res) => {
 
 app.post("/api/products", async (req, res) => {
   try {
-    const newProduct = new Product(
-      {
-        name: "Product",
-        price: 0,
-        description: "Description",
-        image: "Image",
-        qty: 0,
-        category: "Category"
-      }
-    );
+    const { name, price, description, image, qty, category } = req.body;
+    const newProduct = new Product({ name, price, description, image, qty, category });
     const product = await newProduct.save();
     res.json(product);
   } catch (error) {
     res.json({message: "Error creating product"});
+  }
+});
+
+app.put("/api/products/:id", async (req, res) => {
+  const { name, price, description, image, qty, category } = req.body;
+  try {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      product.name = name;
+      product.price = price;
+      product.description = description;
+      product.image = image;
+      product.qty = qty;
+      product.category = category;
+      const updatedProduct = await product.save();
+      res.json(updatedProduct);
+    } else {
+      res.status(404).json({message: "Product not found"});
+    }
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res.status(500).json({ message: "Error updating product", error: error.message });
+  }
+});
+
+app.delete("/api/products/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      await product.remove();
+      res.json({message: "Product removed"});
+    } else {
+      res.status(404).json({message: "Product not found"});
+    }
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    res.status(500).json({ message: "Error deleting product", error: error.message });
   }
 });
 

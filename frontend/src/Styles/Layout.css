@@ -17,11 +17,20 @@
   height: 80px;
 }
 
+/* //categories css */
+
+.categoriesContainer{
+  background-color: #0c2433;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .categories {
   background-color: #0c2433;
   overflow-x: auto;
   white-space: nowrap; 
-  width: 100%; 
+  width: 90%; 
   display: flex; 
   justify-content: space-between;
   align-items: center;

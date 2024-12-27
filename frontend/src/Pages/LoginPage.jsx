@@ -12,14 +12,14 @@ const LoginPage = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isVerified, setIsVerified] = useState(false);
+  //const [isVerified, setIsVerified] = useState(false);
 
   const handleLoginClick = async () => {
     //alert("login" + username + password);
     const email = username;
     const res = await axios.post("/api/userVerification", {email, password});
     console.log(res.data);  
-    setIsVerified(res.data.verified);
+    //setIsVerified(res.data.verified);
     const verified = await res.data.verified;
     if (verified) {
       const name = res.data.name;
