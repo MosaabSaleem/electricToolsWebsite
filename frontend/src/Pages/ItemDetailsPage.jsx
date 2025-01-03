@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button, Input, InputLabel } from "@mui/material";
 import "../Styles/Item.css";
 
 const ItemDetailsPage = () => {
+  const fileInputRef = useRef(null);
+  const [imagePath, setImagePath] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
   const [item, setItem] = useState({
@@ -32,6 +34,21 @@ const ItemDetailsPage = () => {
   if (!item) {
     return <div>Loading...</div>;
   }
+
+  const handleUpload = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const filePath = '../images/' + file.name
+      setImagePath('../images/' + file.name);
+      console.log('Selected file:', file.name);
+      setItem((prevItem) => ({ ...prevItem, image_url: filePath }));
+    }
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,7 +83,11 @@ const ItemDetailsPage = () => {
           <InputLabel>Category</InputLabel>
           <Input placeholder="Category" name="category" value={item.category} onChange={handleChange}></Input>
           <InputLabel>Image</InputLabel>
-          <Input placeholder="Image" name="image" value={item.image_url} onChange={handleChange}></Input>
+          <div>
+            <Input placeholder="Image" name="image_url" value={item.image_url} onChange={handleChange}></Input>
+            <Button variant="contained" color="primary" onClick={handleUpload}>Upload</Button>
+            <input type="file" accept="image/*" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange}></input>
+          </div>
           <InputLabel>Price</InputLabel>
           <Input placeholder="Price" name="price" value={item.price} onChange={handleChange}></Input>
           <InputLabel>Qty</InputLabel>
