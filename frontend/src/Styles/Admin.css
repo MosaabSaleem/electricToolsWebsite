@@ -28,7 +28,7 @@
 }
 
 .stockItems {
-  height: 60vh;
+  height: 50vh;
   overflow-y: auto;
   padding-left: 1vh;
   padding-right: 1vh;

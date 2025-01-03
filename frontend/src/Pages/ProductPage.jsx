@@ -6,6 +6,10 @@ import Categories from "../Components/Categories";
 import axios from "axios";
 
 const ProductPage = () => {
+  //localStorage.clear();
+  //const existingItems = localStorage.getItem("cartItems");
+  //const [cartItems, setCartItems] = useState([]);
+
   const [products, setProducts] = useState([]); 
   //Search function
   const [searchWord, setSearchWord] = useState("");
@@ -50,6 +54,13 @@ const ProductPage = () => {
     // eslint-disable-next-line
   }, [selectedCategory]);
 
+  const handleAddToCart = async (id) => {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    console.log("saving id:", id, "CartItems:", cartItems);
+    cartItems.push(id);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
+
   return (
     <>
       <Categories setSelectedCategory={setSelectedCategory}></Categories>
@@ -79,7 +90,7 @@ const ProductPage = () => {
               {product.qty <= 0 ? (
                 <button className="noAddToCart">Item Unavailable</button>
               ) : (
-                <button className="addToCart">Add to Cart</button>
+                <button className="addToCart" onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
               )}
             </div>
           ))}

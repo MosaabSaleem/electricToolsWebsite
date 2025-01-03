@@ -62,6 +62,16 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
+app.post("/api/products/bulk", async (req, res) => {
+  try {
+    const { ids } = req.body;
+    const products = await Product.find({ _id: { $in: ids } });
+    res.json(products);
+  } catch (error) {
+    res.json({message: "Error fetching products"});
+  }
+})
+
 app.put("/api/products/:id", async (req, res) => {
   const { name, price, description, image_url, qty, category } = req.body;
   try {
