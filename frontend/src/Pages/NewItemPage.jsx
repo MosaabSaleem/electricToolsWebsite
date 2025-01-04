@@ -6,7 +6,7 @@ import "../Styles/Item.css";
 
 const ItemDetailsPage = () => {
   const fileInputRef = useRef(null);
-  const [imagePath, setImagePath] = useState("");
+  //const [imagePath, setImagePath] = useState("");
   const navigate = useNavigate();
   const [item, setItem] = useState({
     name: "",
@@ -30,7 +30,7 @@ const ItemDetailsPage = () => {
     const file = e.target.files[0];
     if (file) {
       const filePath = '../images/' + file.name
-      setImagePath('../images/' + file.name);
+      //setImagePath('../images/' + file.name);
       console.log('Selected file:', file.name);
       setItem((prevItem) => ({ ...prevItem, image_url: filePath }));
     }

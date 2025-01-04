@@ -36,7 +36,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     handleSearch(searchWord);
-  }, [searchWord]);
+  }, [searchWord]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (selectedCategory === "All") {
@@ -47,11 +47,11 @@ const ProductPage = () => {
       );
       setFilteredProducts(tempProducts);
     }
-  }, [selectedCategory]);
+  }, [selectedCategory]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAddToCart = async (id) => {
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    cartItems.push(id);
+    cartItems.push({ item: id, quantity: 1 });
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
 

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Box, Button, Divider } from "@mui/material";
 import "../Styles/Cart.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -16,8 +17,25 @@ const style = {
   borderRadius: "25px",
 };
 
-const CartModal = ({ open, handleClose, fetchCartItems, cartProducts }) => {
+const CartModal = ({ open, handleClose }) => {
   const navigate = useNavigate();
+  const [cartProducts, setCartProducts] = useState([]);
+
+  const fetchCartItems = async () => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const cartItemsId = cartItems.map(item => item.item);
+    try {
+      const response = await axios.post("/api/products/bulk", { ids: cartItemsId });
+      const products = response.data;
+      products.forEach(product => {
+        const cartItem = cartItems.find(item => item.item === product._id);
+        product.quantity = cartItem.quantity;
+      });
+      setCartProducts(products);
+    } catch (error) {
+      console.error("Error fetching cart products:", error);
+    }
+  };
 
   useEffect(() => {
     if (open) {
@@ -25,8 +43,25 @@ const CartModal = ({ open, handleClose, fetchCartItems, cartProducts }) => {
     }
   }, [open]);
 
+  const handleQuantityChange = (productId, newQuantity) => {
+    const quantity = parseInt(newQuantity, 10);
+    if (quantity > 0) {
+      const updatedProducts = cartProducts.map(product =>
+        product._id === productId ? { ...product, quantity } : product
+      );
+      setCartProducts(updatedProducts);
+      // Update local storage
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const updatedCartItems = cartItems.map(item =>
+        item.item === productId ? { ...item, quantity } : item
+      );
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    }
+  };
+
   const handleCheckoutClick = () => {
     navigate("/checkout");
+    handleClose();
   };
 
   const handleClearCart = () => {
@@ -44,7 +79,7 @@ const CartModal = ({ open, handleClose, fetchCartItems, cartProducts }) => {
             <p style={{ width: '100px' }}>Name</p>
             <p>Image</p>
             <p>Price $</p>
-            <p>qty</p>
+            <p>Qty</p>
           </div>
           <Divider></Divider>
           <div className="cartItems">
@@ -59,7 +94,12 @@ const CartModal = ({ open, handleClose, fetchCartItems, cartProducts }) => {
                       alt="item"
                     ></img>
                     <p>{item.price}</p>
-                    <p>{item.selectedQuantity}</p>
+                    <input
+                      type="number"
+                      min="1"
+                      value={item.quantity}
+                      onChange={(e) => handleQuantityChange(item._id, e.target.value)}
+                    />
                   </div>
                   <Divider></Divider>
                 </div>
