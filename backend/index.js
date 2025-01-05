@@ -1,3 +1,4 @@
+const stripe = require("stripe")(process.env.Stripe_Secret_Key);
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./db");
@@ -12,6 +13,39 @@ connectDB();
 app.use(express.json());
 
 app.use(cors());
+
+app.use(express.static("public"));
+
+const Domain = process.env.My_Domain;
+
+app.post('/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    ui_mode: 'embedded',
+    line_items: [
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price: 'price_1QdPfkP2gp2kn1rnh4is20CB',
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    return_url: `${Domain}/return?session_id={CHECKOUT_SESSION_ID}`,
+  });
+
+  res.send({clientSecret: session.client_secret});
+});
+
+app.get('/session-status', async (req, res) => {
+  const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+
+  res.send({
+    status: session.status,
+    customer_email: session.customer_details.email
+  });
+});
+
+// app.listen(4242, () => console.log('Running on port 4242'));
+
 
 app.get("/api", (req, res) => {
   res.json({message: "Hello from server!"});
