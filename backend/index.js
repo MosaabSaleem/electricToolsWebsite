@@ -1,3 +1,4 @@
+require('dotenv').config({ path : '../.env' });
 const stripe = require("stripe")(process.env.Stripe_Secret_Key);
 const express = require("express");
 const cors = require("cors");
@@ -19,20 +20,34 @@ app.use(express.static("public"));
 const Domain = process.env.My_Domain;
 
 app.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    ui_mode: 'embedded',
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: 'price_1QdPfkP2gp2kn1rnh4is20CB',
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    return_url: `${Domain}/return?session_id={CHECKOUT_SESSION_ID}`,
-  });
+  const {items} = req.body;
 
-  res.send({clientSecret: session.client_secret});
+  const line_items = items.map(item => ({
+    price_data: {
+      currency: 'aud',
+      product_data: {
+        name: item.name,
+        images: [item.image_url],
+      },
+      unit_amount: Math.round(item.price * 100),
+    },
+    quantity: item.quantity,
+  }));
+
+  try{
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items,
+      mode: 'payment',
+      success_url: `${Domain}/return?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${Domain}/`,
+    });
+
+    res.json({ id: session.id });
+  } catch (error) {
+    console.error("Error creating checkout session:", error);
+    res.status(500).json({ message: "Error creating checkout session", error: error.message });
+  }
 });
 
 app.get('/session-status', async (req, res) => {
@@ -43,9 +58,6 @@ app.get('/session-status', async (req, res) => {
     customer_email: session.customer_details.email
   });
 });
-
-// app.listen(4242, () => console.log('Running on port 4242'));
-
 
 app.get("/api", (req, res) => {
   res.json({message: "Hello from server!"});

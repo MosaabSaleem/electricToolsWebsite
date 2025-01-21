@@ -9,6 +9,7 @@ import Signup from './Pages/SignupPage';
 import Layout from './Components/Layout';
 import ItemDetailsPage from './Pages/ItemDetailsPage';
 import NewItemPage from './Pages/NewItemPage';
+import Return from './Pages/ReturnPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/checkout' element={<Checkout/>} />
           <Route path='/item/:id' element={<ItemDetailsPage/>} />
           <Route path='/newItem' element={<NewItemPage/>} />
+          <Route path='/return' element={<Return/>} />
         </Routes>
         </Layout>
       </Router>
