@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Box, Button, Divider } from "@mui/material";
 import "../Styles/Cart.css";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const style = {
@@ -18,7 +18,7 @@ const style = {
 };
 
 const CartModal = ({ open, handleClose }) => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
   const finalCartItems = [];
 
@@ -75,14 +75,17 @@ const CartModal = ({ open, handleClose }) => {
   };
 
   const handleCheckoutClick = async () => {
-    try {
-      const response = await axios.post("/create-checkout-session", { items: cartProducts });
-      const { id } = response.data;
-      const stripe = window.Stripe("pk_test_51QdPAbP2gp2kn1rnRPub4TtoVXqNPnOOr7L4f1D78rCQjOg41s764j9CMyIfESE8yqRodEwbzkRSVSxq5Uwh7kxZ00z4x5tMTQ");
-      await stripe.redirectToCheckout({ sessionId: id });
-    } catch (error) {
-      console.error("Error creating checkout session:", error);
-    }
+    // try {
+    //   localStorage.setItem("finalCartProducts", JSON.stringify(cartProducts));
+    //   const response = await axios.post("/create-checkout-session", { items: cartProducts });
+    //   const { id } = response.data;
+    //   const stripe = window.Stripe("pk_test_51QdPAbP2gp2kn1rnRPub4TtoVXqNPnOOr7L4f1D78rCQjOg41s764j9CMyIfESE8yqRodEwbzkRSVSxq5Uwh7kxZ00z4x5tMTQ");
+    //   await stripe.redirectToCheckout({ sessionId: id });
+    // } catch (error) {
+    //   console.error("Error creating checkout session:", error);
+    // }
+    localStorage.setItem("finalCartProducts", JSON.stringify(cartProducts));
+    navigate("/checkout");
   };
 
   const handleClearCart = () => {

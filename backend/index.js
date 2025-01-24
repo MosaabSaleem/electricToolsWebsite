@@ -21,6 +21,7 @@ const Domain = process.env.My_Domain;
 
 app.post('/create-checkout-session', async (req, res) => {
   const {items} = req.body;
+  console.log("Creating checkout session for items:", items);
 
   const line_items = items.map(item => ({
     price_data: {
@@ -34,20 +35,29 @@ app.post('/create-checkout-session', async (req, res) => {
     quantity: item.quantity,
   }));
 
-  try{
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items,
-      mode: 'payment',
-      success_url: `${Domain}/return?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${Domain}/`,
-    });
+  // try{
+  //   const session = await stripe.checkout.sessions.create({
+  //     payment_method_types: ['card'],
+  //     line_items,
+  //     mode: 'payment',
+  //     success_url: `${Domain}/return?session_id={CHECKOUT_SESSION_ID}`,
+  //     cancel_url: `${Domain}/`,
+  //   });
 
-    res.json({ id: session.id });
-  } catch (error) {
-    console.error("Error creating checkout session:", error);
-    res.status(500).json({ message: "Error creating checkout session", error: error.message });
-  }
+  //   res.json({ id: session.id });
+  // } catch (error) {
+  //   console.error("Error creating checkout session:", error);
+  //   res.status(500).json({ message: "Error creating checkout session", error: error.message });
+  // }
+
+  const session = await stripe.checkout.sessions.create({
+    ui_mode: 'embedded',
+    line_items: line_items,
+    mode: 'payment',
+    return_url: `${Domain}/return?session_id={CHECKOUT_SESSION_ID}`,
+  });
+
+  res.send({clientSecret: session.client_secret});
 });
 
 app.get('/session-status', async (req, res) => {
