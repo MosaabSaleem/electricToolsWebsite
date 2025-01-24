@@ -1,0 +1,23 @@
+.outerBody{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+}
+
+.contentContainer {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  width: 60vh;
+  margin-top: 5vh;
+  /* opacity: .5; */
+}
+
+.returnTextContent {
+	text-align: center;
+}

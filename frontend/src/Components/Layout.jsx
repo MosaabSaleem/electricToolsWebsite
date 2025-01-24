@@ -41,6 +41,10 @@ const Layout = ({ children }) => {
     navigate("/login");
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <div className="navBar">
@@ -48,7 +52,9 @@ const Layout = ({ children }) => {
           <div onClick={handleAccountClick} style={{ cursor: "pointer" }}>
             <AccountCircleIcon sx={{ color: "orange", fontSize: 40 }} />
           </div>
-          <img className="logo" src="../images/logo.jpg" alt="logo"></img>
+          <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+            <img className="logo" src="../images/logo.jpg" alt="logo"></img>
+          </div>
           <div onClick={handleOpen} style={{ cursor: "pointer" }}>
             <ShoppingCartIcon sx={{ color: "orange", fontSize: 40 }} />
           </div>

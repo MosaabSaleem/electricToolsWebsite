@@ -22,6 +22,7 @@ const CartModal = ({ open, handleClose }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const finalCartItems = [];
 
+  //Fetching the cart item ids from local storage. Then getting the full details from the database
   const fetchCartItems = async () => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     const cartItemsId = cartItems.map(item => item.item);
@@ -39,12 +40,14 @@ const CartModal = ({ open, handleClose }) => {
     }
   };
 
+  //Had to do it this way so cart can be updated when opened
   useEffect(() => {
     if (open) {
       fetchCartItems();
     }
   }, [open]);
 
+  //changing the quantity of the item in the cart. This affects the id list and detail list
   const handleQuantityChange = (productId, newQuantity) => {
     const quantity = parseInt(newQuantity, 10);
     if (quantity > 0) {
@@ -65,6 +68,7 @@ const CartModal = ({ open, handleClose }) => {
     }
   };
 
+  //removing the item from the cart. This affects the id list and detail list
   const handleRemoveItem = (productId) => {
     const updatedProducts = cartProducts.filter(product => product._id !== productId);
     setCartProducts(updatedProducts);
@@ -74,6 +78,7 @@ const CartModal = ({ open, handleClose }) => {
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
+  //redirecting to the checkout page. saves the final cart to local storage to take to checkout
   const handleCheckoutClick = async () => {
     // try {
     //   localStorage.setItem("finalCartProducts", JSON.stringify(cartProducts));
@@ -86,8 +91,10 @@ const CartModal = ({ open, handleClose }) => {
     // }
     localStorage.setItem("finalCartProducts", JSON.stringify(cartProducts));
     navigate("/checkout");
+    handleClose();
   };
 
+  //removes the ids list from local storage
   const handleClearCart = () => {
     localStorage.removeItem("cartItems");
     window.location.reload();
@@ -99,12 +106,12 @@ const CartModal = ({ open, handleClose }) => {
         <h1>Cart</h1>
 
         <div className="itemsList">
-          <div className="cartItemTitles">
+          {/* <div className="cartItemTitles">
             <p style={{ width: '100px' }}>Name</p>
             <p>Image</p>
             <p>Price $</p>
             <p>Qty</p>
-          </div>
+          </div> */}
           <Divider></Divider>
           <div className="cartItems">
             {cartProducts.length > 0 ? (

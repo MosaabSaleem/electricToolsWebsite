@@ -47,8 +47,9 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></Input>
         </div>
-        
+    
         <Button variant="contained" className='loginButton' sx={{paddingTop: "10px"}} onClick={handleLoginClick}>Login</Button>
+        <br></br>
         <Button variant="contained" className='loginButton' sx={{marginBottom: "10px"}} onClick={handleSignUpClick}>Back</Button>
       </div>
     </div>

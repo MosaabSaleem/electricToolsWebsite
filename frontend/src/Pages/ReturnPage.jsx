@@ -1,15 +1,11 @@
-import React, { /*useCallback,*/ useState, useEffect } from "react";
-// import {loadStripe} from '@stripe/stripe-js';
-// import {
-//   EmbeddedCheckoutProvider,
-//   EmbeddedCheckout
-// } from '@stripe/react-stripe-js';
-import {
-    Navigate
-  } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import "../Styles/Return.css";
+import { Navigate, useNavigate} from "react-router-dom";
+import { Button } from "@mui/material";
 
 
 const Return = () => {
+    const navigate = useNavigate();
     const [status, setStatus] = useState(null);
     const [customerEmail, setCustomerEmail] = useState('');
   
@@ -31,16 +27,25 @@ const Return = () => {
         <Navigate to="/checkout" />
       )
     }
+
+    const handleHome = () => {
+      navigate("/");
+    }
   
     if (status === 'complete') {
       return (
-        <section id="success">
-          <p>
-            We appreciate your business! A confirmation email will be sent to {customerEmail}.
-  
-            If you have any questions, please email <a href="mailto:mosaab2102@outlook.com">mosaab2102@outlook.com</a>.
-          </p>
-        </section>
+        <div className="outerBody">
+          <div className="contentContainer">
+            <h1>Thank you!</h1>
+            <p className="returnTextContent">
+              We appreciate your business! A confirmation email will be sent to {customerEmail}.
+            </p>
+            <p className="returnTextContent">
+              If you have any questions, please email <a href="mailto:mosaab2102@outlook.com">mosaab2102@outlook.com</a>.
+            </p>
+            <Button onClick={handleHome} variant="contained" color="primary">Return Home</Button>
+          </div>
+        </div>
       )
     }
   
