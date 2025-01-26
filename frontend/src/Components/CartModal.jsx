@@ -89,9 +89,14 @@ const CartModal = ({ open, handleClose }) => {
     // } catch (error) {
     //   console.error("Error creating checkout session:", error);
     // }
+    console.log("final cartProducts contains", cartProducts);
+    if (cartProducts.length > 0) {
     localStorage.setItem("finalCartProducts", JSON.stringify(cartProducts));
-    navigate("/checkout");
+    //navigate("/checkout");
     handleClose();
+    } else {
+      alert("Please add items to cart");
+    }
   };
 
   //removes the ids list from local storage

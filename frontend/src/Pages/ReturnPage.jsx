@@ -10,6 +10,7 @@ const Return = () => {
     const [customerEmail, setCustomerEmail] = useState('');
   
     useEffect(() => {
+      localStorage.removeItem("cartItems");
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const sessionId = urlParams.get('session_id');
