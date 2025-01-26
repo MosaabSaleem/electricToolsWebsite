@@ -17,7 +17,7 @@ const LoginPage = () => {
   const handleLoginClick = async () => {
     //alert("login" + username + password);
     const email = username;
-    const res = await axios.post("/api/userVerification", {email, password});
+    const res = await axios.post("/api/userVerification", {email, password}, { withCredentials: true });
     console.log(res.data);  
     //setIsVerified(res.data.verified);
     const verified = await res.data.verified;

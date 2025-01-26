@@ -51,9 +51,35 @@ const ProductPage = () => {
 
   const handleAddToCart = async (id) => {
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    cartItems.push({ item: id, quantity: 1 });
+    const existingItem = cartItems.find((item) => item.item === id);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cartItems.push({ item: id, quantity: 1 });
+    }
+    //cartItems.push({ item: id, quantity: 1 });
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    showPopUpHandler();
   };
+
+  const [showPopUp, setShowPopUp] = useState(false);
+  const showPopUpHandler = () => {
+    setShowPopUp(true);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPopUp(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [showPopUp]);
+
+  let popUp = null;
+  if (showPopUp) {
+    popUp = <div className="addedToCartPopUp">Item Added to Cart!</div>;
+  }
 
   return (
     <>
@@ -66,6 +92,8 @@ const ProductPage = () => {
             onChange={(e) => setSearchWord(e.target.value)}
           ></input>
         </div>
+
+        {popUp}
 
         <h1 className="productsTitle">Products</h1>
 

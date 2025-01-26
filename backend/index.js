@@ -8,6 +8,8 @@ const User = require("./models/User");
 const PORT = process.env.PORT || 5000;
 const app = express();
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 connectDB();
 
@@ -166,23 +168,52 @@ app.delete("/api/products/:id", async (req, res) => {
   }
 });
 
+const generateToken = (userId) => {
+  return jwt.sign({userId}, process.env.JWT_SECRET, {expiresIn: "1d"});
+};
+
+// app.post("/api/userVerification", async (req, res) => {
+//   const { email, password } = req.body;
+//   console.log("Verifying user:", email, password);
+
+//   try {
+//     const user = await User.findOne({ email, password });
+//     if (user) {
+//       console.log("User found:", user);
+//       res.json({verified: true, name: user.name});
+//     } else {
+//       console.log("User not found");
+//       res.json({verified: false});
+//     }
+//   } catch (error) {
+//     console.error("Error verifying user:", error);
+//     res.status(500).json({ message: "Error verifying user", error: error.message });
+//   }
+// });
+
 app.post("/api/userVerification", async (req, res) => {
   const { email, password } = req.body;
-  console.log("Verifying user:", email, password);
   try {
     const user = await User.findOne({ email, password });
+    console.log(await bcrypt.compare(password, user.password));
+
     if (user) {
-      console.log("User found:", user);
-      res.json({verified: true, name: user.name});
+      const token = generateToken(user._id);
+      console.log("User found:", user._id);
+      res.cookie("authToken", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+      });
+      res.status(200).json({ verified: true, name: user.name });
     } else {
-      console.log("User not found");
-      res.json({verified: false});
+      res.status(401).json({ verified: false});
     }
   } catch (error) {
     console.error("Error verifying user:", error);
     res.status(500).json({ message: "Error verifying user", error: error.message });
   }
-});
+}); 
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
