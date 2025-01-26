@@ -4,11 +4,19 @@
   color: white;
 }
 
+.stockListContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2vh;
+}
+
 .stockList {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   padding-left: 4vh;
   padding-right: 4vh;
+  width: 90%;
 }
 
 .stockListTitles {

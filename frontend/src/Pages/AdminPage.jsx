@@ -50,33 +50,34 @@ const AdminPage = () => {
   return (
     <div>
       <h1 className="adminTitle">Admin Page - {adminName}</h1>
-
-      <div className="stockList">
-        <div className="stockListTitles">
-          <p style={{ width: "100px" }}>Name</p>
-          <p>Category</p>
-          <p>Image</p>
-          <p>Price $</p>
-          <p>qty</p>
-        </div>
-        <Divider></Divider>
-        <div className="stockItems">
-          {filteredProducts.map((item) => (
-            <>
-              <div className="stockItem" onClick={() => handleItemClick(item)}>
-                <p style={{ width: "100px" }}>{item.name}</p>
-                <p>{item.category}</p>
-                <img
-                  className="stockItemImage"
-                  src={item.image_url}
-                  alt="item"
-                ></img>
-                <p>{item.price}</p>
-                <p>{item.qty}</p>
-              </div>
-              <Divider></Divider>
-            </>
-          ))}
+      <div className="stockListContainer">
+        <div className="stockList">
+          <div className="stockListTitles">
+            <p style={{ width: "100px" }}>Name</p>
+            <p>Category</p>
+            <p>Image</p>
+            <p>Price $</p>
+            <p>qty</p>
+          </div>
+          <Divider></Divider>
+          <div className="stockItems">
+            {filteredProducts.map((item) => (
+              <>
+                <div className="stockItem" onClick={() => handleItemClick(item)}>
+                  <p style={{ width: "100px" }}>{item.name}</p>
+                  <p>{item.category}</p>
+                  <img
+                    className="stockItemImage"
+                    src={item.image_url}
+                    alt="item"
+                  ></img>
+                  <p>{item.price}</p>
+                  <p>{item.qty}</p>
+                </div>
+                <Divider></Divider>
+              </>
+            ))}
+          </div>
         </div>
       </div>
 
