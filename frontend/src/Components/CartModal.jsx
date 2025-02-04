@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Box, Button, Divider } from "@mui/material";
 import "../Styles/Cart.css";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const style = {
@@ -18,7 +18,7 @@ const style = {
 };
 
 const CartModal = ({ open, handleClose }) => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
   const finalCartItems = [];
 
@@ -45,6 +45,7 @@ const CartModal = ({ open, handleClose }) => {
     if (open) {
       fetchCartItems();
     }
+    // eslint-disable-next-line
   }, [open]);
 
   //changing the quantity of the item in the cart. This affects the id list and detail list

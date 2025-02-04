@@ -32,6 +32,7 @@ const CheckoutForm = () => {
     console.log("response", response);
     const { clientSecret } = response.data;
     return clientSecret;
+    // eslint-disable-next-line
   }, []);
 
   const options = {fetchClientSecret};
