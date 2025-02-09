@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(/*process.env.MONGO_URI*/process.env.AZURE_COSMOS_DATABASE_NAME, {
+    const conn = await mongoose.connect(process.env.MONGO_URI/*process.env.AZURE_COSMOS_DATABASE_NAME*/, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
