@@ -15,7 +15,11 @@ connectDB();
 
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.Hosted_Domain,
+  credentials: true
+}));
+
 
 app.use(express.static("public"));
 
