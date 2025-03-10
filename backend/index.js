@@ -28,7 +28,7 @@ const Domain = process.env.Hosted_Domain;
 app.post('/create-checkout-session', async (req, res) => {
   const {items} = req.body;
   console.log("Creating checkout session for items:", items);
-
+ 
   const line_items = items.map(item => ({
     price_data: {
       currency: 'aud',
