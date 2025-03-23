@@ -11,7 +11,7 @@ const Layout = ({setSelectedCategory}) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("/getProducts");
+        const res = await axios.get("/api/products");
         setProducts(res.data);
       } catch (error) {
         console.log(error);

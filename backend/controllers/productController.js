@@ -73,10 +73,22 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const getProductsBulk = async (req, res) => {
+  try {
+    const { ids } = req.body;
+    const products = await Product.find({ _id: { $in: ids } }).lean();
+    res.json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Error fetching products", error: error.message });
+  }
+};
+
 module.exports = {
   getProducts,
   getProductById,
   createProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  getProductsBulk
 };

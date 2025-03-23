@@ -28,7 +28,8 @@ const CheckoutForm = () => {
 
     //This sends cart information to backend to create a checkout session. Returns the client secret
     //client secret is used to set the items and payment amount to the stripe checkout
-    const response = await axios.post("/create-checkout-session", { items: cartProducts });
+    console.log("checkout starting");
+    const response = await axios.post("/api/stripe/create-checkout-session", { items: cartProducts });
     console.log("response", response);
     const { clientSecret } = response.data;
     return clientSecret;

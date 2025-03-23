@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Box, Button, Divider } from "@mui/material";
 import "../Styles/Cart.css";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const style = {
@@ -18,7 +18,7 @@ const style = {
 };
 
 const CartModal = ({ open, handleClose }) => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
   const finalCartItems = [];
 
@@ -92,9 +92,10 @@ const CartModal = ({ open, handleClose }) => {
     // }
     console.log("final cartProducts contains", cartProducts);
     if (cartProducts.length > 0) {
-    localStorage.setItem("finalCartProducts", JSON.stringify(cartProducts));
-    //navigate("/checkout");
-    handleClose();
+      console.log("moving to checkout");
+      localStorage.setItem("finalCartProducts", JSON.stringify(cartProducts));
+      navigate("/checkout");
+      handleClose();
     } else {
       alert("Please add items to cart");
     }

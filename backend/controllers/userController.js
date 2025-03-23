@@ -5,7 +5,7 @@ const generateToken = require('../utils/generateToken');
 const verifyUser = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email, password });
+    const user = await User.findOne({ email });
     if (user && await bcrypt.compare(password, user.password)) {
       const token = generateToken(user._id);
       res.cookie("authToken", token, {

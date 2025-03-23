@@ -12,23 +12,24 @@ const LoginPage = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  //const [isVerified, setIsVerified] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLoginClick = async () => {
     //alert("login" + username + password);
     const email = username;
-    const res = await axios.post("/api/userVerification", {email, password}, { withCredentials: true });
-    console.log(res.data);  
-    //setIsVerified(res.data.verified);
-    const verified = await res.data.verified;
-    if (verified) {
-      const name = res.data.name;
-      localStorage.setItem("name", name);
-      navigate("/admin");
-    } else {
-      alert("Invalid username or password");
+    try {
+      const res = await axios.post("/api/users/verify", { email, password }, { withCredentials: true });
+      if (res.data.verified) {
+        const name = res.data.name;
+        localStorage.setItem("name", name);
+        navigate("/admin");
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setError("An error occurred while logging in");
     }
-
   };
 
   return (
@@ -48,6 +49,7 @@ const LoginPage = () => {
           ></Input>
         </div>
     
+        {error && <p>{error}</p>}
         <Button variant="contained" className='loginButton' sx={{paddingTop: "10px"}} onClick={handleLoginClick}>Login</Button>
         <br></br>
         <Button variant="contained" className='loginButton' sx={{marginBottom: "10px"}} onClick={handleSignUpClick}>Back</Button>
