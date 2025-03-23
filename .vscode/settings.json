@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/9f9eff3b-d45c-4fae-8e81-5b0d78ae57ef/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/electrictools-website-backend-3",
+    "appService.deploySubpath": "backend"
+}
