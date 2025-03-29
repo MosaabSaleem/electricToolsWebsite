@@ -62,7 +62,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'electrictoolswebsite'
+          app-name: 'electrictools-website-backend-4'
           slot-name: 'Production'
           package: .
           
