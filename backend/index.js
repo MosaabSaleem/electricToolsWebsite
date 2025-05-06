@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.use(express.json());
 app.use(cors({
-  origin: process.env.Hosted_Domain,
+  origin: '*'/*process.env.Hosted_Domain*/,
   credentials: true
 }));
 

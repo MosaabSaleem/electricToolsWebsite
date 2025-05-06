@@ -1,5 +1,10 @@
 const stripe = require("stripe")(process.env.Stripe_Secret_Key);
 
+if (!process.env.Stripe_Secret_Key) {
+  console.error("Stripe Secret Key is not set in environment variables.");
+  process.exit(1);
+}
+
 const createCheckoutSession = async (req, res) => {
   const { items } = req.body;
   console.log("Creating checkout session for items:", items);
